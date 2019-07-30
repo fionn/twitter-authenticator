@@ -6,9 +6,11 @@ One way around this is to make the app under your primary account. But then how 
 
 Feed it your `consumer_key` and `consumer_secret` at the prompts and it'll give you a URL. Go there logged in as your bot account, authorise the app and get the PIN. Then input the PIN into the command line.
 
-The output is formatted such that you can paste it into e.g. `creds.py`. Then just put
+The output is formatted such that you can paste it into a `.env` file and source it. Then access the credentials from the environment with something like
 ```python
-from creds import consumer_key, consumer_secret, access_token, access_token_secret
+auth = tweepy.OAuthHandler(os.environ["API_KEY"], os.environ["API_SECRET"])
+auth.set_access_token(os.environ["ACCESS_TOKEN"],
+                      os.environ["ACCESS_TOKEN_SECRET"])
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 ```
-into your code.
-
+for Tweepy.

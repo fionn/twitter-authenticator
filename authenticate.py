@@ -1,23 +1,27 @@
 #!/usr/bin/env python3
-# Authenticate a twitter app!
+"""Authenticate a twitter app!"""
 
 import tweepy
 
-consumer_key = input("consumer_key: ")
-consumer_secret = input("consumer_secret: ")
+def main() -> None:
+    """Entry point"""
+    consumer_key = input("consumer_key: ")
+    consumer_secret = input("consumer_secret: ")
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth_url = auth.get_authorization_url()
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    auth_url = auth.get_authorization_url()
 
-print("\n" + auth_url, "\n")
+    print("\n" + auth_url, "\n")
 
-pin = input("PIN: ").strip()
+    pin = input("PIN: ").strip()
 
-auth.get_access_token(pin)
+    auth.get_access_token(pin)
 
-print()
-print("consumer_key = \"" + consumer_key + "\"")
-print("consumer_secret = \"" + consumer_secret + "\"")
-print("access_token = \"" + auth.access_token + "\"")
-print("access_token_secret = \"" + auth.access_token_secret + "\"")
+    print()
+    print(f"export API_KEY=\"{consumer_key}\"")
+    print(f"export API_SECRET=\"{consumer_secret}\"")
+    print(f"export ACCESS_TOKEN=\"{auth.access_token}\"")
+    print(f"export ACCESS_TOKEN_SECRET=\"{auth.access_token_secret}\"")
 
+if __name__ == "__main__":
+    main()
