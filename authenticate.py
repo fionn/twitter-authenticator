@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Authenticate a twitter app!"""
 
+import os
 import tweepy
 
 def main() -> None:
     """Entry point"""
-    consumer_key = input("consumer_key: ")
-    consumer_secret = input("consumer_secret: ")
+    consumer_key = os.environ.get("API_KEY") or input("consumer_key: ")
+    consumer_secret = os.environ.get("API_SECRET") or input("consumer_secret: ")
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth_url = auth.get_authorization_url()
